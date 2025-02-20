@@ -1,0 +1,50 @@
+public class Ingeniero extends Persona {
+    //El super() es para llamar al constructor de la clase Persona
+    public Ingeniero(){
+        super();
+    }
+
+    public void Razonar (){
+        System.out.println("Razona");
+    }
+
+    public void trabajarEnGrupo(){
+        System.out.println("Trabaja en grupo");
+    }
+    
+    public Ingeniero (String nif, int altura, int edad){
+        super();
+    }
+}
+
+public class IngenieroInformatico extends Ingeniero{
+    /*super() */
+    public IngenieroInformatico (){
+        super();
+    }
+    
+    public void crearPrograma (){
+        System.out.println("El ingeniero informatico ha creado un programa");
+    }
+}
+
+public class TestPersona {
+    public static void main(String[] args) {
+        //Creo persona por defecto
+        Persona p1 = new Persona();
+        //Creo la persona dandole los datos
+        Persona p2 = new Persona("11223344C", 180, 25);
+
+        //Imprimimos por pantalla los objetos persona
+        System.out.println("p1");
+        System.out.println("p2");
+
+        //Creamos un objeto de la clase Ingeniero e imprimimos su edad
+        Ingeniero i = new Ingeniero();
+        System.out.println("La edad del Ingeniero es: " + i.getEdad());
+
+        //Creamos un objeto de la clase IngenieroInformatico e imprimimos su altura
+        IngenieroInformatico ii = new IngenieroInformatico();
+        System.out.println("La altura del Ingeniero Informatico es: " + ii.getAltura());
+    }
+}
