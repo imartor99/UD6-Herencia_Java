@@ -1,0 +1,42 @@
+public class Yogur {
+    double calorias;
+
+    public Yogur() {
+        calorias = 120.5;
+    }
+    public double getCalorias() {
+        return calorias;
+    }
+
+    //Hacemos un ToString para poder imprimir objetos en el main
+    @Override
+    public String toString() {
+        return "Yogur{" + "calorias=" + calorias + '}';
+    }
+}    
+
+public class YogurDesnatado extends Yogur {
+    // diseña la clase YogurDesnatado sabiendo que siempre tiene la mitad de calorías que un Yogur normal
+    public YogurDesnatado(){
+        super();
+        calorias = calorias / 2;
+    }
+}
+
+public class TestYogur {
+    public static void main(String[] args) {
+        //Creamos dos objetos de la clase yogur y dos de la clase YogurDesnatado
+        Yogur yogur = new Yogur();
+        Yogur yogur2 = new Yogur();
+        YogurDesnatado yogurDesnatado = new YogurDesnatado();
+        YogurDesnatado yogurDesnatado2 = new YogurDesnatado();
+       
+
+        //Imprimimos por pantalla los objetos creados
+        System.out.println(yogur);
+        System.out.println(yogur2);
+        System.out.println(yogurDesnatado);
+        System.out.println(yogurDesnatado2);
+
+    }
+}
