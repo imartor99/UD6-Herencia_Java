@@ -1,1 +1,102 @@
+public class Empleado {
+    protected  String nombre;
+
+    //Un constructor por defecto
+    public Empleado() {
+        this.nombre = "nombre";
+    }
+
+    //Constructor con parámetros que inicializa el atributo nombre
+    public Empleado(String nombre) {
+        this.nombre = nombre;
+    }
+
+    //Setters y Getters
+    public String getNombre() {
+        return nombre;
+    }
+    
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    @Override
+    public String toString() {
+        return "Empleado " + nombre ;
+    }
+}
+
+
+public class Operario extends Empleado {
+    // Super
+    public Operario(String nombre) {
+        super(nombre);
+    }
+
+    // ToString
+    @Override
+    public String toString() {
+        return super.toString() + " -> Operario";
+    }
+}
+
+public class Directivo extends Empleado{
+    //Super
+    public Directivo (String nombre){
+        super(nombre);
+    }
+
+    // ToString
+    @Override
+    public String toString() {
+        return super.toString() + " -> Directivo";
+    }
+}
+
+
+public class Oficial extends Operario{
+    public Oficial (String nombre){
+        super(nombre);
+    }
+
+    // ToString
+    @Override
+    public String toString() {
+        return super.toString() + " -> Oficial";
+    }
+}
+
+
+public class Tecnico extends Operario{
+    //Super
+    public Tecnico (String nombre){
+        super(nombre);
+    }
+
+    // ToString
+    @Override
+    public String toString() {
+        return super.toString() + " -> Tecnico";
+    }
+}
+
+
+//Programa MAIN
+
+public class MainEmpleado {
+    public static void main(String[] args) {
+        Empleado E1 = new Empleado("Rafa");
+        Directivo D1 = new Directivo("Mario");
+        Operario OP1 = new Operario("Alfonso");
+        Oficial OF1 = new Oficial("Luis");
+        Tecnico T1 = new Tecnico("Pablo");
+        
+        System.out.println(E1);
+        System.out.println(D1);
+        System.out.println(OP1);
+        System.out.println(OF1);
+        System.out.println(T1);
+    }
+}
+
 
