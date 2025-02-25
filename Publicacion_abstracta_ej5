@@ -1,0 +1,131 @@
+//He realizado el ejercicio 5 con superclase abstracta
+
+public abstract class Publicacion {
+    // Atributos
+    protected String codISBN;
+    protected String titulo;
+    protected int anyoPublicacion;
+
+    // Constructor
+    public Publicacion(String codISBN, String titulo, int anyoPublicacion) {
+        this.codISBN = codISBN;
+        this.titulo = titulo;
+        this.anyoPublicacion = anyoPublicacion;
+    }
+
+    // Getters y Setters
+    public String getCodISBN() {
+        return codISBN;
+    }
+
+    public void setCodISBN(String codISBN) {
+        this.codISBN = codISBN;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public int getAnyoPublicacion() {
+        return anyoPublicacion;
+    }
+
+    public void setAnyoPublicacion(int anyoPublicacion) {
+        this.anyoPublicacion = anyoPublicacion;
+    }
+
+    @Override
+    public abstract String toString();
+}
+
+
+class Libro extends Publicacion {
+    private boolean prestado;
+
+    public Libro(String codISBN, String titulo, int anyoPublicacion) {
+        super(codISBN, titulo, anyoPublicacion);
+        this.prestado = false;
+    }
+
+    public void presta() {
+        if (!prestado) {
+            prestado = true;
+            System.out.println("El libro ha sido prestado.");
+        } else {
+            System.out.println("El libro ya está prestado.");
+        }
+    }
+
+    public void devuelve() {
+        if (prestado) {
+            prestado = false;
+            System.out.println("El libro ha sido devuelto.");
+        } else {
+            System.out.println("El libro no estaba prestado.");
+        }
+    }
+
+    public boolean estaPrestado() {
+        return prestado;
+    }
+
+    @Override
+    public String toString() {
+        return "Libro: " + titulo + " (ISBN: " + codISBN + ", Año: " + anyoPublicacion + ", Prestado: " + prestado + ")";
+    }
+}
+
+
+class Revista extends Publicacion {
+    private int numero;
+
+    public Revista(String isbn, String titulo, int anioPublicacion, int numero) {
+        super(isbn, titulo, anioPublicacion);
+        this.numero = numero;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+    
+    @Override
+    public String toString() {
+        return "Revista: " + titulo + " (ISBN: " + codISBN + ", Año: " + anyoPublicacion + ", Número: " + numero + ")";
+    }
+}
+
+//MAIN
+
+public class MainPublicacion {
+    public static void main(String[] args) {
+
+        Libro libro1 = new Libro("123456", "La ruta Prohibida", 2007);
+        Libro libro2 = new Libro("112233", "Los Otros", 2016);
+        Libro libro3 = new Libro("456789", "La rosa del mundo", 1995);
+        Revista revista1 = new Revista("444555", "Año Cero", 2019, 344);
+        Revista revista2 = new Revista("002244", "National Geographic", 2003, 255);
+
+        System.out.println(libro1);
+        System.out.println(libro2);
+        System.out.println(libro3);
+        System.out.println(revista1);
+        System.out.println(revista2);
+        libro2.presta();
+        if (libro2.estaPrestado()) {
+            System.out.println("El libro esta prestado");
+        }
+        libro2.presta();
+        libro2.devuelve();
+        if (libro2.estaPrestado()) {
+            System.out.println("El libro esta prestado");
+        }
+        libro3.presta();
+        System.out.println(libro2);
+        System.out.println(libro3);
+
+    }
+}
