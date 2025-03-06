@@ -1,0 +1,132 @@
+import java.util.GregorianCalendar;
+
+public abstract class Personas {
+    // Atributos
+    String nombre;
+    String apellidos;
+    GregorianCalendar fechaNacim;
+
+    // Constructor
+    public Personas(String nombre, String apellidos, int anioNacim, int mes) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.fechaNacim = new GregorianCalendar(anioNacim, mes, 1);  // Crear la fecha con año y mes
+    }
+
+    // Getters y Setters
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public GregorianCalendar getFechaNacim() {
+        return fechaNacim;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public void setFechaNacim(GregorianCalendar fechaNacim) {
+        this.fechaNacim = fechaNacim;
+    }
+
+    @Override
+    public String toString() {
+        return "Nombre: " + this.nombre + ", Apellidos: " + this.apellidos + ", Fecha de Nacimiento: " + this.fechaNacim.getTime();
+    }
+
+    // Método abstracto llamado Mostrar
+    public abstract void Mostrar();
+}
+
+class Alumno extends Personas {
+    // Atributos
+    protected String grupo;
+    protected double notaMedia;
+
+    // Constructor de Alumno
+    public Alumno(String nombre, String apellidos, int anioNacim, int mes, String grupo, double notaMedia) {
+        super(nombre, apellidos, anioNacim, mes);  // Llamada al constructor de la superclase
+        this.grupo = grupo;
+        this.notaMedia = notaMedia;
+    }
+
+    // Método Mostrar
+    @Override
+    public void Mostrar() {
+        System.out.println("Nombre: " + this.nombre);
+        System.out.println("Apellidos: " + this.apellidos);
+        System.out.println("Fecha de Nacimiento: " + this.fechaNacim.getTime());
+        System.out.println("Grupo: " + this.grupo);
+        System.out.println("Nota media: " + this.notaMedia);
+    }
+
+    // ToString herencia de Personas
+    @Override
+    public String toString() {
+        return "Alumno [grupo=" + grupo + ", notaMedia=" + notaMedia + ", " + super.toString() + "]";
+    }
+}
+
+
+class Profesor extends Personas {
+    // Atributos
+    String especialidad;
+    double salario;
+
+    // Constructor de Profesor
+    Profesor(String nombre, String apellidos, int anioNacim, int mes, String especialidad, double salario) {
+        super(nombre, apellidos, anioNacim, mes);  // Llamada al constructor de la superclase
+        this.especialidad = especialidad;
+        this.salario = salario;
+    }
+
+    // Método Mostrar
+    @Override
+    public void Mostrar() {
+        System.out.println("Nombre: " + this.nombre);
+        System.out.println("Apellidos: " + this.apellidos);
+        System.out.println("Fecha de Nacimiento: " + this.fechaNacim.getTime());
+        System.out.println("Especialidad: " + this.especialidad);
+        System.out.println("Salario: " + this.salario);
+    }
+
+    // ToString herencia de Personas
+    @Override
+    public String toString() {
+        return "Profesor{" +
+                "nombre='" + nombre + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", fechaNacim=" + fechaNacim +
+                ", especialidad='" + especialidad + '\'' +
+                ", salario=" + salario +
+                "}";
+    }
+}
+
+
+public class MainPersonas {
+    public static void main(String[] args) {
+        // Creamos objetos de ambas clases
+        Alumno alumno1 = new Alumno("Juan", "Pérez", 2001, 5, "Grupo A", 8.5);
+
+        Profesor profesor1 = new Profesor("Ana", "García", 1980, 3, "Matemáticas", 2500.0);
+
+        // Mostrar la información de ambos
+        alumno1.Mostrar();  // Llamada al método Mostrar() de la clase Alumno
+
+        System.out.println();  // Salto de linea
+
+        profesor1.Mostrar();  // Llamada al método Mostrar() de la clase Profesor
+    }
+}
+
+
