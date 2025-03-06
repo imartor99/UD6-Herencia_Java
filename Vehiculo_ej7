@@ -1,0 +1,146 @@
+//SUPERCLASE ABSTRACTA VEHICULO
+
+abstract class Vehiculo {
+    // Atributos de clase
+    static int vehiculosCreados = 0;
+    static int kilometrosTotales = 0;
+
+    // Atributo de instancia
+    int kilometrosRecorridos;
+
+    public Vehiculo() {
+        this.kilometrosRecorridos = 0;
+        vehiculosCreados++;
+    }
+
+    // Método abstracto que deben implementar las subclases
+    public abstract void accion(String tipo);
+
+    // Método de clase para ver el kilometraje total
+    public static int verKilometrajeTotal() {
+        return kilometrosTotales;
+    }
+}
+
+//CLASE HIJA BICICLETA
+
+class Bicicleta extends Vehiculo {
+
+    public Bicicleta() {
+        super();
+    }
+
+    @Override
+    public void accion(String tipo) {
+        switch (tipo) {
+            case "andar":
+                kilometrosRecorridos += 10;
+                kilometrosTotales += 10;
+                break;
+            case "caballito":
+                kilometrosRecorridos += 2;
+                kilometrosTotales += 2;
+                break;
+            default:
+                System.out.println("Acción no reconocida.");
+        }
+    }
+
+    public int verKilometraje() {
+        return kilometrosRecorridos;
+    }
+}
+
+
+//CLASE HIJA COCHE
+
+class Coche extends Vehiculo {
+
+    public Coche() {
+        super();
+    }
+
+    @Override
+    public void accion(String tipo) {
+        switch (tipo) {
+            case "andar":
+                kilometrosRecorridos += 50;
+                kilometrosTotales += 50;
+                break;
+            case "quemar rueda":
+                kilometrosRecorridos += 20;
+                kilometrosTotales += 20;
+                break;
+            default:
+                System.out.println("Acción no reconocida.");
+        }
+    }
+
+    public int verKilometraje() {
+        return kilometrosRecorridos;
+    }
+}
+
+//PROGRAMA PRUEBA TESTVEHICULO
+
+import java.util.Scanner;
+
+public class TestVehiculo {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Bicicleta bicicleta = new Bicicleta();
+        Coche coche = new Coche();
+
+        while (true) {
+            System.out.println("VEHICULOS");
+            System.out.println("------------------------------");
+            System.out.println("1. Anda con la bicicleta");
+            System.out.println("2. Haz el caballito con la bicicleta");
+            System.out.println("3. Anda con el coche");
+            System.out.println("4. Quema rueda con el coche");
+            System.out.println("5. Ver kilometraje de la bicicleta");
+            System.out.println("6. Ver kilometraje del coche");
+            System.out.println("7. Ver kilometraje total");
+            System.out.println("8. Salir");
+
+            System.out.print("Elige una opción (1-8): ");
+            int opcion = scanner.nextInt();
+            scanner.nextLine();  // Limpiar el buffer
+
+            switch (opcion) {
+                case 1:
+                    bicicleta.accion("andar");
+                    System.out.println("Has andado con la bicicleta. ");
+                    break;
+                case 2:
+                    bicicleta.accion("caballito");
+                    System.out.println("Has hecho el caballito con la bicicleta.");
+                    break;
+                case 3:
+                    coche.accion("andar");
+                    System.out.println("Has andado con el coche.");
+                    break;
+                case 4:
+                    coche.accion("quemar rueda");
+                    System.out.println("Has quemado rueda con el coche.");
+                    break;
+                case 5:
+                    System.out.println("Kilometraje de la bicicleta: " + bicicleta.verKilometraje() + " km");
+                    break;
+                case 6:
+                    System.out.println("Kilometraje del coche: " + coche.verKilometraje() + " km");
+                    break;
+                case 7:
+                    System.out.println("Kilometraje total de todos los vehículos: " + Vehiculo.verKilometrajeTotal() + " km");
+                    break;
+                case 8:
+                    System.out.println("Saliendo...");
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("Opción no válida. Por favor elige una opción entre 1 y 8.");
+            }
+        }
+    }
+}
+
