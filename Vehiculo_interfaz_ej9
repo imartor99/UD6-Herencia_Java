@@ -1,0 +1,192 @@
+//INTERFAZ Arrancable
+
+interface Arrancable {
+    void arrancar();
+    void detener();
+    boolean estaArrancado();
+} 
+
+//SUPERCLASE ABSTRACTA Vehículo
+
+
+abstract class Vehiculo {
+    // Atributos de clase
+    static int vehiculosCreados = 0;
+    static int kilometrosTotales = 0;
+
+    // Atributo de instancia
+    int kilometrosRecorridos;
+
+    public Vehiculo() {
+        this.kilometrosRecorridos = 0;
+        vehiculosCreados++;
+    }
+
+    // Método abstracto que deben implementar las subclases
+    public abstract void accion(String tipo);
+
+    // Método de clase para ver el kilometraje total
+    public static int verKilometrajeTotal() {
+        return kilometrosTotales;
+    }
+}
+
+//CLASE HIJA Bicicleta
+
+class Bicicleta extends Vehiculo {
+
+    public Bicicleta() {
+        super();
+    }
+
+    @Override
+    public void accion(String tipo) {
+        switch (tipo) {
+            case "andar":
+                kilometrosRecorridos += 10;
+                kilometrosTotales += 10;
+                break;
+            case "caballito":
+                kilometrosRecorridos += 2;
+                kilometrosTotales += 2;
+                break;
+            default:
+                System.out.println("Acción no reconocida.");
+        }
+    }
+
+    public int verKilometraje() {
+        return kilometrosRecorridos;
+    }
+}
+
+//CLASE HIJA Coche que implementa Arrancable por sus características.
+
+class Coche extends Vehiculo implements Arrancable {
+    private boolean arrancado;
+
+    public Coche() {
+        super();
+        this.arrancado = false;
+    }
+
+    @Override
+    public void accion(String tipo) {
+        if (!arrancado) {
+            System.out.println("No puedes realizar esta acción porque el coche está apagado.");
+            return;
+        }
+        switch (tipo) {
+            case "andar":
+                kilometrosRecorridos += 50;
+                kilometrosTotales += 50;
+                break;
+            case "quemar rueda":
+                kilometrosRecorridos += 20;
+                kilometrosTotales += 20;
+                break;
+            default:
+                System.out.println("Acción no reconocida.");
+        }
+    }
+
+    @Override
+    public void arrancar() {
+        if (!arrancado) {
+            arrancado = true;
+            System.out.println("El coche ha arrancado.");
+        } else {
+            System.out.println("El coche ya está arrancado.");
+        }
+    }
+
+    @Override
+    public void detener() {
+        if (arrancado) {
+            arrancado = false;
+            System.out.println("El coche se ha detenido.");
+        } else {
+            System.out.println("El coche ya está detenido.");
+        }
+    }
+
+    @Override
+    public boolean estaArrancado() {
+        return arrancado;
+    }
+
+    
+    public int verKilometraje() {
+        return kilometrosRecorridos;
+    }
+
+}
+
+//MAIN para probar lo anterior.
+
+import java.util.Scanner;
+
+public class TestVehiculo {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Bicicleta bicicleta = new Bicicleta();
+        Coche coche = new Coche();
+
+        while (true) {
+            System.out.println("VEHÍCULOS");
+            System.out.println("------------------------------");
+            System.out.println("1. Andar con la bicicleta");
+            System.out.println("2. Hacer caballito con la bicicleta");
+            System.out.println("3. Arrancar el coche");
+            System.out.println("4. Andar con el coche");
+            System.out.println("5. Quemar rueda con el coche");
+            System.out.println("6. Detener el coche");
+            System.out.println("7. Ver kilometraje de la bicicleta");
+            System.out.println("8. Ver kilometraje del coche");
+            System.out.println("9. Ver kilometraje total");
+            System.out.println("10. Salir");
+
+            System.out.print("Elige una opción (1-10): ");
+            int opcion = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (opcion) {
+                case 1:
+                    bicicleta.accion("andar");
+                    System.out.println("Has andado con la bicicleta.");
+                    break;
+                case 2:
+                    bicicleta.accion("caballito");
+                    System.out.println("Has hecho el caballito con la bicicleta.");
+                    break;
+                case 3:
+                    coche.arrancar();
+                    break;
+                case 4:
+                    coche.accion("andar");
+                    break;
+                case 5:
+                    coche.accion("quemar rueda");
+                    break;
+                case 6:
+                    coche.detener();
+                    break;
+                case 7:
+                    System.out.println("Kilometraje de la bicicleta: " + bicicleta.verKilometraje() + " km");
+                    break;
+                case 8:
+                    System.out.println("Kilometraje del coche: " + coche.verKilometraje() + " km");
+                    break;
+                case 9:
+                    System.out.println("Kilometraje total de todos los vehículos: " + Vehiculo.verKilometrajeTotal() + " km");
+                    break;
+                case 10:
+                    System.out.println("Saliendo...");
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("Opción no válida. Por favor, elige una opción entre 1 y 10.");
+            }
+        }
+    }
+}
